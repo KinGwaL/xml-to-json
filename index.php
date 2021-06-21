@@ -27,7 +27,12 @@ if (!empty($_GET['xml']) && isset($_GET['xml'])) {
             $path = $xmlQueryString;
             $xml = simplexml_load_file($path);
             $json = xmlToArray($xml);
-            echo json_encode($json);
+
+            if(!empty($_GET['key']) && isset($_GET['key'])) {
+                echo json_encode($json[$_GET['key']]);
+            }else {
+                echo json_encode($json);
+            }
             return;
         } else {
             // Display error that XML isn't found with provided URL
